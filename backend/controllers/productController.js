@@ -34,6 +34,36 @@ export const getProductById = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+// Get products by Category
+export const getProductsByCategory = async (req, res) => {
+  const { category } = req.params;
+
+  try {
+    const decodedCategory = category.replace(/-/g, "");
+    const products = await Product.find({
+      category: { $regex: decodedCategory, $options: "i" },
+    });
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    console.log(`Error ${error}`);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+// Get all categories
+export const getAllCategories = async (req, res) => {
+  try {
+    const categories = await Product.distinct("category");
+    if (!categories || categories.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No categories found" });
+    }
+    res.status(200).json({ success: true, data: categories });
+  } catch (error) {
+    console.log(`Error ${error}`);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
 // !POST METHODS
 // Create a new product

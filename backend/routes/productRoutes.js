@@ -3,6 +3,8 @@ import {
   createProduct,
   getAllProducts,
   getProductById,
+  getProductsByCategory,
+  getAllCategories,
 } from "../controllers/productController.js";
 const router = express.Router();
 
@@ -13,7 +15,12 @@ router.get("/home", (req, res) => {
 //! GET METHODS
 // Get all products route
 router.get("/", getAllProducts);
-router.get("/:id", getProductById);
+// Get product by ID
+router.get("/categories/:category/:id", getProductById);
+// Get products by category
+router.get("/categories/:category", getProductsByCategory);
+// Get all categories
+router.get("/categories", getAllCategories);
 
 // !POST METHODS
 // Create a new product route
