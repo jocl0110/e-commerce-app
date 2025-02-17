@@ -5,6 +5,8 @@ import productRoutes from "./routes/productRoutes.js";
 dotenv.config();
 
 const app = express();
+// Middleware
+app.use(express.json());
 
 app.use("/api/products", productRoutes);
 connectDB()
