@@ -2,13 +2,18 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 
 const app = express();
 // Middleware
 app.use(express.json());
 
+// Routes
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+
+// Connect to MongoDB
 connectDB()
   .then(() => {
     app.listen(process.env.PORT, () => {
