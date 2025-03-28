@@ -1,4 +1,16 @@
 import mongoose from "mongoose";
+import { Document } from "mongoose";
+export interface IUser extends Document {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  cart: mongoose.Schema.Types.ObjectId;
+  wishlist: mongoose.Schema.Types.ObjectId;
+  reviews: mongoose.Schema.Types.ObjectId;
+}
 
 const userSchema = new mongoose.Schema(
   {
@@ -61,6 +73,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
 export default User;

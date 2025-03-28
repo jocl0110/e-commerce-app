@@ -1,13 +1,13 @@
 import NodeMailer from "nodemailer";
-import dotenv from "dotenv";
+import { EMAIL_PORT } from "../constants/env";
 
-dotenv.config();
-
-export const transporter = NodeMailer.createTransport({
+const transporter = NodeMailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
+  port: parseInt(EMAIL_PORT),
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
+
+export default transporter;
